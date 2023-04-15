@@ -1,0 +1,100 @@
+import java.util.*;
+public class Main
+{
+	public static void display(Stack<Integer> bal)
+	{
+	    if(bal.empty())
+        return;
+        
+        int x = bal.peek();
+        bal.pop();
+        System.out.println(x);
+        display(bal);
+        bal.push(x);
+	}
+	
+public static void main(String[] args) 
+{
+int InitialBalance = 5000;
+int ch;
+Scanner sc=new Scanner(System.in);
+Scanner ob=new Scanner(System.in);
+Stack<Integer> bal = new Stack<Integer>();
+bal.add(InitialBalance);
+do
+{
+System.out.println("\n**MENU**");	
+System.out.println("1.Check Bank Details");	
+System.out.println("2.Transaction History");	
+System.out.println("3.Fund Transfer");	
+System.out.println("4.Loan");	
+System.out.println("5.Exit\n");
+System.out.println("Enter your Choice");	
+ch=sc.nextInt();
+switch(ch)	
+{
+case 1:
+	System.out.println("*Bank Details*");	
+	System.out.println("Enter Account number : ");
+	break;
+	
+case 2:
+	System.out.println("*Transaction History*");
+	display(bal);
+	break;
+
+case 3:
+	System.out.println("*Fund Transfer*");	
+	System.out.println("1. Withdraw");	
+	System.out.println("2. Deposit");	
+	System.out.println("3. Transfer to another account");	
+	System.out.println("Enter your choice :");
+	int ch3 = sc.nextInt();
+	switch(ch3)
+	{
+	case 1:
+		System.out.println("*Withdraw*");	
+		System.out.println("Enter the amount");
+		int w = ob.nextInt();
+		if(w<InitialBalance)
+		{
+		    InitialBalance=InitialBalance-w;
+		    bal.push(InitialBalance);
+	        System.out.println("New Balance : " + InitialBalance);
+		}
+		else
+		{
+		    System.out.println("Insuffient Balance\n Money cannot be withdrawn");
+		}
+	    break;
+	    
+	case 2:
+		System.out.println("*Deposit*");	
+		System.out.println("Enter the amount");
+		int d = ob.nextInt();
+		InitialBalance=InitialBalance+d;
+		bal.push(InitialBalance);
+		System.out.println("New Balance : " + InitialBalance);
+		break;
+		
+	case 3:
+		System.out.println("*Transfer to another account*");	
+		System.out.println("Enter sender account number : ");	
+		System.out.println("Enter receiver account number : ");	
+		break;		
+	}
+	break;
+	
+case 4:
+	System.out.println("Loan");
+	System.out.println("Enter account number");
+	break;
+	
+case 5:
+	System.out.println("Thank you");
+    System.exit(0);
+
+  }
+}while(ch!=5);
+}
+}
